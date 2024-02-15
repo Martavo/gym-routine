@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\RoutineController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +20,9 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 
-Route::resource('/exercises', ExerciseController::class); //rutas para exercises
+Route::get('/home', [HomeController::class, 'home'])->name('home.home');
 
-Route::resource('/routines', RoutineController::class); //rutas para routines
+Route::resource('/exercises', ExerciseController::class)->names('exercises');//rutas para exercises
+
+Route::resource('/routines', RoutineController::class)->names('routines');; //rutas para routines
 

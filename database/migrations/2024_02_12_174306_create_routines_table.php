@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('routines', function (Blueprint $table) {
             $table->id();
-            $table->enum('routine_type', ['upper_trunk', 'lower_trunk'])->notNullable();
+            $table->enum('routine_type', ['upper_body', 'lower_body', 'full-body'])->notNullable();
             $table->date('date')->nullable();
             
 
