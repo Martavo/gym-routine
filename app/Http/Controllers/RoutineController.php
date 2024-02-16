@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Routine;
+use App\Models\Exercise;
 use Illuminate\Http\Request;
 
 class RoutineController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $routines = Routine::with('exercises')->get();
+
+        return view('routines.index', [
+            'routines' => $routines,
+        ]);
     }
 
     /**
@@ -20,7 +22,13 @@ class RoutineController extends Controller
      */
     public function create()
     {
-        //
+        $exercises = Exercise::all();
+        $routines = Routine::all();
+    
+        return view('routines.create', [
+            'exercises' => $exercises,
+            'routines' => $routines,
+        ]);
     }
 
     /**
@@ -28,8 +36,34 @@ class RoutineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([ 
+            'routine_type' => 'required|in:upper_body,lower_body,full-body',
+            'date' => 'required',
+           
+        ]);
+
+        
+        $routine = new Routine();
+        $routine->routine_type = $request->input('routine_type');
+        $routine->date = $request->input('date');
+        $routine->save();
+
+    
+        $selectedExercises = [];
+
+        for ($i = 1; $i <= 6; $i++) {
+            $selectedExerciseId = $request->input('exercise' . $i);
+
+            if (!empty($selectedExerciseId)) {
+                $selectedExercises[] = $selectedExerciseId;
+            }
+        }
+
+        $routine->exercises()->attach($selectedExercises);
+
+        return redirect()->route('routines.index')->with('msg', 'Rutina guardada correctamente');
     }
+
 
     /**
      * Display the specified resource.
@@ -42,24 +76,58 @@ class RoutineController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Routine $routine)
+    public function edit($id)
     {
-        //
+        $routine = Routine::findOrFail($id);
+        $exercises = Exercise::all();
+    
+        return view('routines.edit', [
+            'routine' => $routine,
+            'exercises' => $exercises,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Routine $routine)
+    public function update(Request $request, $id)
     {
-        //
+
+        $request->validate([ 
+            'routine_type' => 'required|in:upper_body,lower_body,full-body',
+            'date' => 'required',
+        ]);
+
+        $routine = Routine::find($id);
+        $routine->routine_type = $request->input('routine_type');
+        $routine->date = $request->input('date');
+        $routine->save();
+
+       
+        $selectedExercises = [];
+
+        for ($i = 1; $i <= 6; $i++) {
+            $selectedExerciseId = $request->input('exercise' . $i);
+
+            if (!empty($selectedExerciseId)) {
+                $selectedExercises[] = $selectedExerciseId;
+            }
+        }
+
+        
+        $routine->exercises()->sync($selectedExercises);
+
+        return redirect()->route('routines.index')->with('msg', 'Rutina actualizada correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Routine $routine)
+    public function destroy($id)
     {
-        //
+        $routine=Routine::find($id);
+        $routine->delete();
+
+        return redirect("routines");
     }
 }

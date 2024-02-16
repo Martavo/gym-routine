@@ -9,8 +9,10 @@ class Routine extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function exercises()
     {
-        return $this->belongsToMany(Exercise::class, 'exercises_routines'); //relación con la entidad exercise de muchos a muchos
+        return $this->belongsToMany(Exercise::class, 'exercises_routines');
     }
 }
