@@ -23,3 +23,4 @@ Route::resource('/exercises', ExerciseController::class); //rutas para exercises
 
 Route::resource('/routines', RoutineController::class); //rutas para routines
 
+
