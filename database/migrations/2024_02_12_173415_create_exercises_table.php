@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('exercises', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255)->unique()->notNullable();
-            $table->enum('type', ['upper_trunk', 'lower_trunk', 'core', 'cardio'])->notNullable();
+            $table->enum('type', ['upper_body', 'lower_body', 'core', 'cardio'])->notNullable();
             $table->text('description')->notNullable();
             $table->string('material')->nullable();
         });
