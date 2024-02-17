@@ -13,6 +13,7 @@ class ExerciseController extends Controller
     public function index()
     {
         $exercises=Exercise::all(); //te coge todos los datos de la base de datos
+        $exercises = Exercise::orderBy('type')->get();
         return view('exercises.index', ['exercises' => $exercises]);
        
     }
@@ -37,6 +38,7 @@ class ExerciseController extends Controller
             'type' => 'required|in:upper_body,lower_body,core,cardio',
             'description' => 'required',
             'material' => 'nullable',
+            'video_link' => 'nullable|url',
         ]);
     
         $exercise = new Exercise();
@@ -44,6 +46,7 @@ class ExerciseController extends Controller
         $exercise->type = $request->input('type'); 
         $exercise->description = $request->input('description'); 
         $exercise->material = $request->input('material');
+        $exercise->video_link = $request->input('video_link');
         $exercise->save();
         
         return redirect()->route('exercises.index')->with('msg', 'Ejercicio guardado');
@@ -78,6 +81,7 @@ class ExerciseController extends Controller
             'type' => 'required|in:upper_body,lower_body,core,cardio',
             'description' => 'required',
             'material' => 'nullable',
+            'video_link' => 'nullable|url',
             
         ]);
 
@@ -86,6 +90,7 @@ class ExerciseController extends Controller
         $exercise->type = $request->input('type'); 
         $exercise->description = $request->input('description'); 
         $exercise->material = $request->input('material');
+        $exercise->video_link = $request->input('video_link');
         $exercise->save();
 
 
@@ -102,4 +107,5 @@ class ExerciseController extends Controller
 
         return redirect("exercises");
     }
+
 }

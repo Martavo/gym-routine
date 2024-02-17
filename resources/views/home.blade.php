@@ -11,11 +11,11 @@
         <div class="flex flex-col items-center space-y-8 mt-4">
             
             <div class="bg-orange-300 p-10 rounded-md mt-5">
-                <a href="{{ route('exercises.index') }}" class="text-4xl block text-center underline">EJERCICIOS</a>
+                <a href="{{ route('exercises.index') }}" class="text-4xl block text-center underline" title="Gestiona todos tus ejercicios">EJERCICIOS</a>                
             </div>
 
             <div class="bg-orange-300 p-10 rounded-md">
-                <a href="{{ route('routines.index') }}" class="text-4xl block text-center underline">RUTINAS DE ENTRENAMIENTO</a>
+            <a href="{{ route('routines.index') }}" class="text-4xl block text-center underline" title="Gestiona todas tus rutinas de entrenamiento">RUTINAS DE ENTRENAMIENTO</a>
             </div>
         </div>
 

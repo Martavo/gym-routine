@@ -17,6 +17,7 @@ return new class extends Migration
             $table->enum('type', ['upper_body', 'lower_body', 'core', 'cardio'])->notNullable();
             $table->text('description')->notNullable();
             $table->string('material')->nullable();
+            $table->string('video_link')->nullable();
         });
     }
 

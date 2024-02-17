@@ -55,6 +55,12 @@
                 <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="material" name="material" value="{{ $exercise->material }}" placeholder="Introduce el material necesario" required>
             </div>
         </div>
+        <div class="mb-4 row">
+            <label for="video_link" class="block text-gray-700 text-lg font-bold mb-2">URL del Video</label>
+            <div class="col-sm-5 w-full">
+                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="video_link" name="video_link" value="{{ $exercise->video_link }}" placeholder="Introduce la URL del video">
+            </div>
+        </div>
         <div class="">
                 <button type="submit" class="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4 my-auto rounded">Guardar</button>
                 <a href="{{ url('exercises') }}" class="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4 my-auto rounded">Volver</a>

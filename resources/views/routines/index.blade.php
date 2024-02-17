@@ -16,9 +16,8 @@
         <table class="min-w-full border rounded-lg overflow-hidden">
             <thead class="bg-gray-800 text-white">
                 <tr>
-                    <th class="py-2 px-4">ID</th>
+                    <th class="py-2 px-4">Fecha prevista</th>
                     <th class="py-2 px-4">Tipo de rutina</th>
-                    <th class="py-2 px-4">Fecha planificada</th>
                     <th class="py-2 px-4">Ejercicio 1</th>
                     <th class="py-2 px-4">Ejercicio 2</th>
                     <th class="py-2 px-4">Ejercicio 3</th>
@@ -33,9 +32,22 @@
             <tbody class="bg-gray-200 text-center">
             @foreach($routines as $routine)
             <tr>
-                <td>{{ $routine->id }}</td>
-                <td>{{ $routine->routine_type }}</td>
                 <td>{{ $routine->date }}</td>
+                <td>
+                    @switch($routine->routine_type)
+                        @case('upper_body')
+                            Tronco Superior
+                            @break
+                        @case('lower_body')
+                            Tren Inferior
+                            @break
+                        @case('full-body')
+                            Full-body
+                            @break
+                        @default
+                            {{ $routine->routine_type }}
+                    @endswitch
+                </td>
                 
                 @foreach($routine->exercises as $exercise)
                     <td>{{ $exercise->name }}</td>
@@ -57,7 +69,7 @@
         </table>
             
     </div>
-    <div class="bg-orange-300 p-2 rounded-md flex mb-20 hover:bg-gray-500">
+    <div class="bg-orange-300 p-2 rounded-md flex mb-20 hover:bg-gray-500 mt-5">
         <a href="{{ url ('routines/create') }}"class="btn btn-primary btn-sm">Registrar rutina</a>
     </div>
 </main>

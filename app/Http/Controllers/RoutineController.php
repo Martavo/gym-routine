@@ -11,6 +11,7 @@ class RoutineController extends Controller
     public function index()
     {
         $routines = Routine::with('exercises')->get();
+        $routines = Routine::all()->sortBy('date');
 
         return view('routines.index', [
             'routines' => $routines,
