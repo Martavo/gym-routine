@@ -5,13 +5,14 @@
 @section('content')
 <main class="h-screen flex flex-col items-center">
     @if($errors->any())
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">Error!</strong>
+            <span class="block sm:inline">¡Hay algún error en tu acción!</span>
             <ul>
                 @foreach($errors->all() as $error)
-                    <li>{{$error}}</li>
+                    <li>{{ $error }}</li>
                 @endforeach
             </ul>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
@@ -34,7 +35,7 @@
             <div class="mb-4 row">
                 <label for="date" class="block text-gray-700 text-lg font-bold mb-2">Día previsto</label>
                 <div class="col-sm-5">
-                    <input type="date" id="date" name="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                    <input type="date" id="date" name="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
                 </div>
             </div>
 

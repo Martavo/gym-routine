@@ -6,15 +6,15 @@
 <main class="h-screen flex flex-col items-center">
 
     @if($errors->any())
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{$error}}</li>
-                        @endforeach
-                </ul>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">Error!</strong>
+            <span class="block sm:inline">¡Hay algún error en tu acción!</span>
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
     @endif
 
     <h1 class="text-center text-6xl text-gray-700 font-mono font-bold mb-10 mt-10">Editar ejercicio</h1>
@@ -46,13 +46,13 @@
         <div class="mb-4 row">
             <label for="description" class="block text-gray-700 text-lg font-bold mb-2">Descripción del Ejercicio</label>
             <div class="col-sm-5">
-                <textarea class="resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" name="description" placeholder="Introduce la descripción del ejercicio" required>{{ $exercise->description }}</textarea>
+                <textarea class="resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" name="description" placeholder="Introduce la descripción del ejercicio">{{ $exercise->description }}</textarea>
             </div>
         </div>
         <div class="mb-4 row">
             <label for="material" class="block text-gray-700 text-lg font-bold mb-2">Material Necesario</label>
             <div class="col-sm-5 w-full">
-                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="material" name="material" value="{{ $exercise->material }}" placeholder="Introduce el material necesario" required>
+                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="material" name="material" value="{{ $exercise->material }}" placeholder="Introduce el material necesario">
             </div>
         </div>
         <div class="mb-4 row">

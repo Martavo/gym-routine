@@ -5,8 +5,8 @@
 @section('content')
 
 <main class="h-screen flex flex-col items-center">
-    <a href="{{ route('home.home') }}" class="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-500 ml-3 flex justify-start mb-20 mr-auto mt-3">
-         Página principal
+    <a href="{{route('home.home')}}" class="justify-start mb-10 mr-auto mt-7 ml-7">
+        <img class="w-32" src="{{ asset('img/logo.jpg') }}" alt="Logotipoo gestión liga">
     </a>
 
     <h1 class="text-center text-8xl text-gray-700 font-mono font-bold mb-10">MENÚ DE RUTINAS</h1>
@@ -72,6 +72,14 @@
     <div class="bg-orange-300 p-2 rounded-md flex mb-20 hover:bg-gray-500 mt-5">
         <a href="{{ url ('routines/create') }}"class="btn btn-primary btn-sm">Registrar rutina</a>
     </div>
+
+    <script>
+        function confirmDelete(name) {
+            return confirm("¿Estás seguro de que deseas borrar el ejercicio: " + name + "?");
+        }
+    </script>
+
+
 </main>
 
 

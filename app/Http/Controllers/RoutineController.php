@@ -39,8 +39,13 @@ class RoutineController extends Controller
     {
         $request->validate([ 
             'routine_type' => 'required|in:upper_body,lower_body,full-body',
-            'date' => 'required',
-           
+            'date' => 'required|date|after_or_equal:today',
+        ], [
+            'routine_type.required' => 'El tipo de rutina es obligatorio.',
+            'routine_type.in' => 'El tipo de rutina seleccionado no es válido.',
+            'date.required' => 'La fecha es obligatoria.',
+            'date.date' => 'La fecha no tiene un formato válido.',
+            'date.after_or_equal' => 'La fecha debe ser hoy o en el futuro.',
         ]);
 
         
@@ -62,7 +67,7 @@ class RoutineController extends Controller
 
         $routine->exercises()->attach($selectedExercises);
 
-        return redirect()->route('routines.index')->with('msg', 'Rutina guardada correctamente');
+        return view("routines.message", ['msg' => "Rutina creada correctamente"]);
     }
 
 
@@ -93,10 +98,15 @@ class RoutineController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $request->validate([ 
             'routine_type' => 'required|in:upper_body,lower_body,full-body',
-            'date' => 'required',
+            'date' => 'required|date|after_or_equal:today',
+        ], [
+            'routine_type.required' => 'El tipo de rutina es obligatorio.',
+            'routine_type.in' => 'El tipo de rutina seleccionado no es válido.',
+            'date.required' => 'La fecha es obligatoria.',
+            'date.date' => 'La fecha no tiene un formato válido.',
+            'date.after_or_equal' => 'La fecha debe ser hoy o en el futuro.',
         ]);
 
         $routine = Routine::find($id);
@@ -118,7 +128,7 @@ class RoutineController extends Controller
         
         $routine->exercises()->sync($selectedExercises);
 
-        return redirect()->route('routines.index')->with('msg', 'Rutina actualizada correctamente');
+        return view("routines.message", ['msg' => "Rutina modificada correctamente"]);
     }
 
     /**
@@ -129,6 +139,6 @@ class RoutineController extends Controller
         $routine=Routine::find($id);
         $routine->delete();
 
-        return redirect("routines");
+        return view("routines.message", ['msg' => "Rutina eliminada correctamente"]);
     }
 }

@@ -5,8 +5,9 @@
 @section('content')
 
 <main class="h-screen flex flex-col items-center">
-    <a href="{{ route('home.home') }}" class="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-500 ml-3 flex justify-start mb-20 mr-auto mt-3">
-         Página principal
+   
+    <a href="{{route('home.home')}}" class="justify-start mb-10 mr-auto mt-7 ml-7">
+        <img class="w-32" src="{{ asset('img/logo.jpg') }}" alt="Logotipoo gestión liga">
     </a>
 
     <h1 class="text-center text-8xl text-gray-700 font-mono font-bold mb-10">MENÚ DE EJERCICIOS</h1>
@@ -56,7 +57,7 @@
                     </td>
                     <td><a href="{{ url('exercises/'.$exercise->id.'/edit') }}" class="btn btn-warning btn-sm bg-orange-200">Editar</a></td>
                     <td>
-                        <form action="{{ url('exercises/' .$exercise->id) }}" method="post">
+                        <form action="{{ url('exercises/' .$exercise->id) }}" method="post" onsubmit="return confirm('¿Estás segur@ de que quieres borrar este ejercicio?');">
                             @method("DELETE")
                             @csrf <!-- Genera un tocken de seguridad-->
                             <button type="submit" class="btn btn-danger btn-sm bg-red-200">Eliminar</button>
