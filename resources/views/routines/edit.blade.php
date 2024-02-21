@@ -6,13 +6,13 @@
 <main class="h-screen flex flex-col items-center">
 
     @if($errors->any())
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <span class="block sm:inline font-bold">¡Hay algún error en tu acción!</span>
             <ul>
                 @foreach($errors->all() as $error)
-                    <li>{{$error}}</li>
+                    <li>{{ $error }}</li>
                 @endforeach
             </ul>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 

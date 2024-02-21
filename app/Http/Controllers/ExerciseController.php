@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exercise;
+use App\Models\ExercisesRoutine;
 use Illuminate\Http\Request;
 
 class ExerciseController extends Controller
@@ -13,6 +14,7 @@ class ExerciseController extends Controller
     public function index()
     {
         $exercises=Exercise::all(); //te coge todos los datos de la base de datos
+       $exercises = Exercise::orderBy('type')->get();
         return view('exercises.index', ['exercises' => $exercises]);
        
     }
@@ -33,10 +35,19 @@ class ExerciseController extends Controller
     public function store(Request $request)
     {
         $request->validate([ 
-            'name' => 'required|max:100',
+            'name' => 'required|unique:exercises|max:255',
             'type' => 'required|in:upper_body,lower_body,core,cardio',
-            'description' => 'required',
+            'description' => 'nullable',
             'material' => 'nullable',
+            'video_link' => 'nullable|url',
+        ], [
+            'name.required' => 'El nombre del ejercicio es obligatorio.',
+            'name.unique' => 'Ya existe un ejercicio con este nombre. Elige un nombre único.',
+            'name.max' => 'El nombre del ejercicio no puede tener más de :max caracteres.',
+            'type.required' => 'El tipo de ejercicio es obligatorio.',
+            'type.in' => 'El tipo de ejercicio seleccionado no es válido.',
+            'video_link.url' => 'El enlace del video debe ser una URL válida.',
+            
         ]);
     
         $exercise = new Exercise();
@@ -44,9 +55,11 @@ class ExerciseController extends Controller
         $exercise->type = $request->input('type'); 
         $exercise->description = $request->input('description'); 
         $exercise->material = $request->input('material');
+        $exercise->video_link = $request->input('video_link');
         $exercise->save();
         
-        return redirect()->route('exercises.index')->with('msg', 'Ejercicio guardado');
+        
+        return view("exercises.message", ['msg' => "Ejercicio creado correctamente"]);
     }
 
     /**
@@ -71,13 +84,18 @@ class ExerciseController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-
-        $request->validate([ //se colocan las reglas de la validacion del formulario
-            'name' => 'required|max:100,'.$id,
+        $request->validate([ 
+            'name' => 'required|max:255',
             'type' => 'required|in:upper_body,lower_body,core,cardio',
-            'description' => 'required',
+            'description' => 'nullable',
             'material' => 'nullable',
+            'video_link' => 'nullable|url',
+        ], [
+            'name.required' => 'El nombre del ejercicio es obligatorio.',
+            'name.unique' => 'Ya existe un ejercicio con este nombre. Elige un nombre único.',
+            'name.max' => 'El nombre del ejercicio no puede tener más de :max caracteres.',
+            'type.required' => 'El tipo de ejercicio es obligatorio.',
+            'video_link.url' => 'El enlace del video debe ser una URL válida.',
             
         ]);
 
@@ -86,20 +104,26 @@ class ExerciseController extends Controller
         $exercise->type = $request->input('type'); 
         $exercise->description = $request->input('description'); 
         $exercise->material = $request->input('material');
+        $exercise->video_link = $request->input('video_link');
         $exercise->save();
 
 
-        return redirect()->route('exercises.index')->with('msg', 'Ejercicio modificado');
+        return view("exercises.message", ['msg' => "Ejercicio modificado correctamente"]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
-    {
-        $exercise=Exercise::find($id);
-        $exercise->delete();
+{
+    $exercise = Exercise::find($id);
 
-        return redirect("exercises");
+    if ($exercise->routines->isEmpty()) {
+        $exercise->delete();
+        return view('exercises.message', ['msg' => "Ejercicio eliminado correctamente"]);
+    } else {
+        return view('exercises.message', ['msg' => "No puedes eliminar este ejercicio. Está asociado a una o más rutinas."]);
     }
+    
+}
 }
