@@ -19,6 +19,7 @@
     <h1 class="text-center text-6xl text-gray-700 font-mono font-bold mb-10 mt-10">Registrar rutina</h1>
 
     <div class="overflow-x-auto w-1/3 bg-gray-200 p-4 rounded-md">
+        
         <form action="{{ route('routines.store') }}" method="post" class="max-w-md mx-auto">
             @csrf
             <div class="mb-4 row">
@@ -63,6 +64,14 @@
                 <a href="{{ route('routines.index') }}" class="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4 my-auto rounded">Volver</a>
             </div>
         </form>
+    </div>
+
+    <div class="mr-10 mb-10 ml-10 mt-10">
+            <div class="bg-gray-200/75 p-6 rounded-md shadow-md w-93 text-center">
+                <p class="text-gray-700 text-lg font-bold mb-4">Este formulario te permite registrar rutinas. 
+                    Selecciona el tipo, la fecha de entrenamiento y añade 6 ejercicios para cumplir tu objetivo. 
+                    ¡Guarda tu rutina y sigue construyendo un estilo de vida saludable!</p>
+            </div>
     </div>
 </main>
 @endsection

@@ -27,7 +27,7 @@
                 </tr>
             </thead>
 
-            <tbody class="bg-gray-200 text-center">
+            <tbody class="bg-gray-200 text-center ml-2">
             @foreach($exercises as $exercise)
                 <tr>
                     <td>
@@ -55,12 +55,12 @@
                         
                         <a href="{{ $exercise->video_link }}" target="_blank">{{ $exercise->video_link }}</a>
                     </td>
-                    <td><a href="{{ url('exercises/'.$exercise->id.'/edit') }}" class="btn btn-warning btn-sm bg-orange-200">Editar</a></td>
+                    <td><a href="{{ url('exercises/'.$exercise->id.'/edit') }}" class="btn btn-warning btn-sm bg-orange-200 ml-5 mr-2">Editar</a></td>
                     <td>
                         <form action="{{ url('exercises/' .$exercise->id) }}" method="post" onsubmit="return confirm('¿Estás segur@ de que quieres borrar este ejercicio?');">
                             @method("DELETE")
                             @csrf <!-- Genera un tocken de seguridad-->
-                            <button type="submit" class="btn btn-danger btn-sm bg-red-200">Eliminar</button>
+                            <button type="submit" class="btn btn-danger btn-sm bg-red-200 mr-2">Eliminar</button>
                         </form>
                     </td>
                 </tr>

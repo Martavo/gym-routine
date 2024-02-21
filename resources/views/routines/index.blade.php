@@ -53,14 +53,14 @@
                     <td>{{ $exercise->name }}</td>
                 @endforeach
                 <td>
-                    <a  href="{{url('routines/'.$routine->id.'/edit')}}" class="btn btn-warning btn-sm bg-orange-200">Editar</a>
+                    <a  href="{{url('routines/'.$routine->id.'/edit')}}" class="btn btn-warning btn-sm bg-orange-200 ml-3 mr-2">Editar</a>
                 </td>
                 <td>
-                    <form action="{{url ('routines/' .$routine->id)}}" method="post">
-                        @method("DELETE")
-                        @csrf <!-- Genera un tocken de seguridad-->
-                        <button type="submit" class = "btn btn-danger btn-sm bg-red-200">Eliminar</button>
-                    </form>
+                <form action="{{ url('routines/' . $routine->id) }}" method="post" onsubmit="return confirm('¿Estás segur@ de que quieres borrar esta rutina?');">
+                    @method("DELETE")
+                    @csrf <!-- Genera un tocken de seguridad-->
+                    <button type="submit" class="btn btn-danger btn-sm bg-red-200 mr-2">Eliminar</button>
+                </form>
                 </td>
             </tr>
             @endforeach
@@ -73,11 +73,6 @@
         <a href="{{ url ('routines/create') }}"class="btn btn-primary btn-sm">Registrar rutina</a>
     </div>
 
-    <script>
-        function confirmDelete(name) {
-            return confirm("¿Estás seguro de que deseas borrar el ejercicio: " + name + "?");
-        }
-    </script>
 
 
 </main>

@@ -85,7 +85,7 @@ class ExerciseController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([ 
-            'name' => 'required|unique:exercises|max:255',
+            'name' => 'required|max:255',
             'type' => 'required|in:upper_body,lower_body,core,cardio',
             'description' => 'nullable',
             'material' => 'nullable',
@@ -95,7 +95,6 @@ class ExerciseController extends Controller
             'name.unique' => 'Ya existe un ejercicio con este nombre. Elige un nombre único.',
             'name.max' => 'El nombre del ejercicio no puede tener más de :max caracteres.',
             'type.required' => 'El tipo de ejercicio es obligatorio.',
-            'type.in' => 'El tipo de ejercicio seleccionado no es válido.',
             'video_link.url' => 'El enlace del video debe ser una URL válida.',
             
         ]);

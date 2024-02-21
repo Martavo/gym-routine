@@ -4,7 +4,6 @@
 
 @section('content')
 <main class="h-screen flex flex-col items-center">
-
     @if($errors->any())
         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
             <strong class="font-bold">Error!</strong>
@@ -19,9 +18,8 @@
 
     <h1 class="text-center text-6xl text-gray-700 font-mono font-bold mb-10 mt-10">Registrar ejercicio</h1>
 
-
     <div class="overflow-x-auto w-1/3 bg-gray-200 p-4 rounded-md">
-    <form action="{{ url('exercises') }}" method="post" class="max-w-md mx-auto">
+        <form action="{{ url('exercises') }}" method="post" class="max-w-md mx-auto">
             @csrf
             <div class="mb-4 row">
                 <label for="name" class="block text-gray-700 text-lg font-bold mb-2">Nombre del Ejercicio</label>
@@ -66,5 +64,13 @@
         </form>    
 
     </div>
+    <div class="mr-10 mb-auto ml-10 mt-10">
+            <div class="bg-gray-200/75 p-6 rounded-md shadow-md w-93 text-center">
+                <p class="text-gray-700 text-lg font-bold mb-4">Este formulario te permite registrar ejercicios. 
+                    Selecciona el nombre, el tipo y añade si quieres una descripción, material y video. 
+                    ¡Guarda tus ejercicios para crear grandes rutinas de entrenamiento!</p>
+            </div>
+    </div>
+    
 </main>
 @endsection

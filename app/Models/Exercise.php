@@ -10,6 +10,7 @@ class Exercise extends Model
     use HasFactory;
     
     protected $fillable = ['name', 'type', 'description', 'material', 'video_link'];
+
     
     public $timestamps = false;
 

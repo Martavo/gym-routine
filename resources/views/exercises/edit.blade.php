@@ -36,7 +36,7 @@
             <div class="col-sm-5">
                 <select name="type" id="type" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                     <option value="" class="text-gray-200">Seleccionar nivel</option>
-                    <option value="upper" {{ $exercise->type === 'upper_body' ? 'selected' : '' }}>Tren Superior</option>
+                    <option value="upper_body" {{ $exercise->type === 'upper_body' ? 'selected' : '' }}>Tren Superior</option>
                     <option value="lower_body" {{ $exercise->type === 'lower_body' ? 'selected' : '' }}>Tren Inferior</option>
                     <option value="core" {{ $exercise->type === 'core' ? 'selected' : '' }}>Core</option>
                     <option value="cardio" {{ $exercise->type === 'cardio' ? 'selected' : '' }}>Cardio</option>
